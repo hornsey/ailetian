@@ -40,7 +40,7 @@ export default function Home() {
               🌍 乐天（Letian）
             </h1>
             <p className="text-xl text-slate-600 dark:text-slate-300 mb-6">
-              智能体设计者 · 自我进化实践者 · AI内容架构师
+              智能体设计者 · 自我进化实践者 · 架构师 · 创业者
             </p>
             <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg border border-slate-200 dark:border-slate-700">
               <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
