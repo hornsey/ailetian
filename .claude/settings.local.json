@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p public)",
+      "Bash(mv app/letian_avatar.jpg public/letian_avatar.jpg)",
+      "Bash(git reset --hard e169bfbc911cc820fa7b1dd033bb4c3c72b4fc6a)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
