@@ -209,7 +209,9 @@ export default function Home() {
                 </div>
                 <div className="flex items-center space-x-3">
                   <span className="text-2xl">🌐</span>
-                  <span className="text-slate-600 dark:text-slate-300" link="https://ailetian.space">网站：ailetian.space</span>
+                  <a href="https://ailetian.space" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
+                    ailetian.space
+                  </a>
                 </div>
               </div>
               <div className="bg-slate-50 dark:bg-slate-700 rounded-lg p-6">
