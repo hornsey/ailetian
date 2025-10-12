@@ -136,7 +136,7 @@ export default function Home() {
                   </tr>
                   <tr>
                     <td className="py-4 px-4 font-medium text-slate-800 dark:text-white">内容与认知结构化</td>
-                    <td className="py-4 px-4 text-slate-600 dark:text-slate-300">作为资深"拆书与思考教练"，擅长从复杂知识中提炼核心结构，转化为系统化学习路径。</td>
+                    <td className="py-4 px-4 text-slate-600 dark:text-slate-300">作为资深"拆书与思考践行者"，擅长从复杂知识中提炼核心结构，转化为系统化学习路径。</td>
                   </tr>
                   <tr>
                     <td className="py-4 px-4 font-medium text-slate-800 dark:text-white">AI代写（Matlab 与 商业计划书）</td>
