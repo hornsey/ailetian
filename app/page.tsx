@@ -40,7 +40,7 @@ export default function Home() {
               🌍 乐天（Letian）
             </h1>
             <p className="text-xl text-slate-600 dark:text-slate-300 mb-6">
-              智能体设计者 · 自我进化实践者 · 架构师 · 创业者
+              智能体开发者 · 自我进化实践者 · 架构师
             </p>
             <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg border border-slate-200 dark:border-slate-700">
               <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
@@ -62,7 +62,7 @@ export default function Home() {
                 我相信智能体不仅是未来的生产力工具，更是人类自我认知与创造力的延伸。
               </p>
               <p>
-                过去几年，我持续研究 AI 自动化、智能体架构、内容系统化输出等主题，致力于将复杂的技术转化为人人可用的智慧工具。
+                过去几年，我持续研究 AI 自动化、智能体技术、个人认知成长等主题，致力于将复杂的技术转化为人人可用的智慧工具。
               </p>
               <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 mt-6">
                 <p className="text-lg font-medium text-blue-800 dark:text-blue-200">
@@ -88,7 +88,7 @@ export default function Home() {
                   🤖 智能体解决方案
                 </h3>
                 <p className="text-slate-600 dark:text-slate-300 text-sm">
-                  基于 Coze、n8n、Flowise、Dify 等平台，打造实用型 AI 自动化系统。
+                  基于 Coze、n8n、Dify 等平台，打造实用型 AI 自动化系统。
                 </p>
               </div>
               <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-lg p-6">
@@ -218,7 +218,7 @@ export default function Home() {
                 <h3 className="font-semibold text-slate-800 dark:text-white mb-3">💼 合作方向</h3>
                 <ul className="space-y-2 text-slate-600 dark:text-slate-300">
                   <li>• AI智能体设计</li>
-                  <li>• 认知教练</li>
+                  <li>• 个人认知成长教练</li>
                   <li>• AI代写</li>
                 </ul>
               </div>
@@ -231,7 +231,7 @@ export default function Home() {
       <footer className="bg-slate-100 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700">
         <div className="max-w-4xl mx-auto px-6 py-8 text-center">
           <p className="text-slate-600 dark:text-slate-400">
-            © 2024 乐天 Letian. 用智能体思维探索人类潜能的边界。
+            © 2025 乐天 Letian. 用AI技术探索人类潜能的边界。
           </p>
         </div>
       </footer>
