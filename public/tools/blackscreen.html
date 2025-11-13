@@ -3,145 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="纯黑屏幕 - 双击进入全屏">
-    <title>Black Screen</title>
+    <meta name="description" content="纯黑屏幕工具 - 护眼黑屏模式">
+    <title>黑屏工具 - 乐天 Letian</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        body {
-            background-color: #000000;
+        body.fullscreen-mode {
             cursor: none;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
-
-        #blackscreen {
-            width: 100vw;
-            height: 100vh;
-            background-color: #000000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        /* 提示信息 */
-        .intro {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 16px;
-            text-align: center;
-            position: absolute;
-            top: 30%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 1;
-            transition: opacity 1s ease;
-            pointer-events: none;
-            user-select: none;
-            line-height: 1.8;
-            width: 80%;
-            max-width: 600px;
-        }
-
-        .intro.hidden {
-            opacity: 0;
-        }
-
-        #hint {
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 14px;
-            text-align: center;
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 1;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
-            user-select: none;
-        }
-
-        #hint.hidden {
-            opacity: 0;
-        }
-
-        /* 鼠标移动时显示光标 */
-        body.show-cursor {
+        body.fullscreen-mode.show-cursor {
             cursor: default;
         }
-
-        /* 全屏时隐藏滚动条 */
-        body:fullscreen {
-            overflow: hidden;
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
         }
-
-        body:-webkit-full-screen {
-            overflow: hidden;
+        .fade-out {
+            animation: fadeOut 0.5s ease-out;
+            opacity: 0;
         }
-
-        body:-moz-full-screen {
-            overflow: hidden;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-
-        body:-ms-fullscreen {
-            overflow: hidden;
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
         }
     </style>
 </head>
-<body>
-    <div id="blackscreen">
-        <div class="intro">
-            欢迎使用纯黑屏幕工具
-            <br><br>
-            这是一个简单而实用的工具，可以将您的屏幕变成一个纯黑色的画面。它可以帮助您：
-            <br>
-            • 在夜间提供舒适的黑暗环境
-            <br>
-            • 减少蓝光对眼睛的刺激
-            <br>
-            • 在不需要时临时关闭屏幕显示
-            <br><br>
-            使用方法：双击屏幕进入全屏模式，再次双击或按ESC键退出
+<body class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <!-- 正常模式：头部导航 -->
+    <nav id="navbar" class="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-slate-200 z-50">
+        <div class="max-w-4xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="/" class="text-xl font-bold text-slate-800">乐天 Letian</a>
+                <a href="/" class="text-slate-600 hover:text-slate-900 transition-colors">返回首页</a>
+            </div>
         </div>
-        <div id="hint">双击屏幕进入全屏模式</div>
+    </nav>
+
+    <!-- 正常模式：主要内容 -->
+    <main id="mainContent" class="pt-24 pb-16">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
+                <!-- 标题区 -->
+                <div class="bg-gradient-to-r from-slate-800 to-slate-900 text-white p-8">
+                    <h1 class="text-3xl font-bold mb-2">黑屏工具</h1>
+                    <p class="text-slate-300">护眼黑屏模式 - 减少蓝光刺激</p>
+                </div>
+
+                <!-- 功能介绍 -->
+                <div class="p-8">
+                    <div class="mb-8">
+                        <h2 class="text-xl font-semibold text-slate-800 mb-4">功能特点</h2>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg">
+                                <div class="text-2xl">🌙</div>
+                                <div>
+                                    <h3 class="font-medium text-slate-800 mb-1">夜间护眼</h3>
+                                    <p class="text-sm text-slate-600">在夜间提供舒适的黑暗环境</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg">
+                                <div class="text-2xl">👁️</div>
+                                <div>
+                                    <h3 class="font-medium text-slate-800 mb-1">减少蓝光</h3>
+                                    <p class="text-sm text-slate-600">减少蓝光对眼睛的刺激</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg">
+                                <div class="text-2xl">💻</div>
+                                <div>
+                                    <h3 class="font-medium text-slate-800 mb-1">临时关屏</h3>
+                                    <p class="text-sm text-slate-600">不需要时临时关闭屏幕显示</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg">
+                                <div class="text-2xl">⚡</div>
+                                <div>
+                                    <h3 class="font-medium text-slate-800 mb-1">快速切换</h3>
+                                    <p class="text-sm text-slate-600">双击屏幕即可快速进入/退出</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 使用说明 -->
+                    <div class="mb-8">
+                        <h2 class="text-xl font-semibold text-slate-800 mb-4">使用说明</h2>
+                        <div class="bg-blue-50 rounded-lg p-6 space-y-3">
+                            <div class="flex items-center gap-3">
+                                <span class="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-semibold text-sm">1</span>
+                                <p class="text-slate-700">点击下方"进入黑屏模式"按钮</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-semibold text-sm">2</span>
+                                <p class="text-slate-700">双击屏幕进入全屏模式（推荐）</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-semibold text-sm">3</span>
+                                <p class="text-slate-700">再次双击屏幕或按 ESC 键退出</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 快捷键说明 -->
+                    <div class="mb-8">
+                        <h2 class="text-xl font-semibold text-slate-800 mb-4">快捷键</h2>
+                        <div class="grid md:grid-cols-2 gap-3">
+                            <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                                <span class="text-slate-700">双击屏幕</span>
+                                <span class="px-3 py-1 bg-slate-200 text-slate-700 rounded text-sm font-mono">进入/退出全屏</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                                <span class="text-slate-700">ESC 键</span>
+                                <span class="px-3 py-1 bg-slate-200 text-slate-700 rounded text-sm font-mono">退出黑屏</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 启动按钮 -->
+                    <button
+                        onclick="enterBlackScreen()"
+                        class="w-full py-4 bg-slate-800 text-white rounded-lg hover:bg-slate-900 transition-colors font-medium text-lg"
+                    >
+                        进入黑屏模式
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 黑屏模式 -->
+    <div id="blackscreen" class="hidden fixed inset-0 bg-black z-[100] flex items-center justify-center">
+        <!-- 欢迎提示 -->
+        <div id="welcomeText" class="text-center text-white/60 px-6 max-w-2xl fade-in">
+            <h2 class="text-2xl font-semibold mb-4">欢迎使用黑屏工具</h2>
+            <p class="text-lg leading-relaxed mb-6">
+                这是一个简单而实用的护眼工具，可以将您的屏幕变成纯黑色画面
+            </p>
+            <div class="space-y-2 text-base">
+                <p>• 在夜间提供舒适的黑暗环境</p>
+                <p>• 减少蓝光对眼睛的刺激</p>
+                <p>• 在不需要时临时关闭屏幕显示</p>
+            </div>
+            <p class="mt-8 text-white/40 text-sm">双击屏幕进入全屏模式</p>
+        </div>
+
+        <!-- 底部提示 -->
+        <div id="hint" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/30 text-sm fade-in">
+            双击屏幕进入全屏模式 | 按 ESC 退出
+        </div>
     </div>
 
     <script>
         const blackscreen = document.getElementById('blackscreen');
+        const navbar = document.getElementById('navbar');
+        const mainContent = document.getElementById('mainContent');
         const hint = document.getElementById('hint');
+        const welcomeText = document.getElementById('welcomeText');
         const body = document.body;
         let hideHintTimer = null;
         let hideCursorTimer = null;
+        let hideWelcomeTimer = null;
+
+        // 进入黑屏模式
+        function enterBlackScreen() {
+            navbar.classList.add('hidden');
+            mainContent.classList.add('hidden');
+            blackscreen.classList.remove('hidden');
+            body.classList.add('fullscreen-mode');
+            body.style.overflow = 'hidden';
+
+            // 5秒后隐藏欢迎文字
+            hideWelcomeTimer = setTimeout(() => {
+                welcomeText.classList.add('fade-out');
+                setTimeout(() => {
+                    welcomeText.style.display = 'none';
+                }, 500);
+            }, 5000);
+
+            // 3秒后隐藏提示
+            setTimeout(() => {
+                hint.classList.add('fade-out');
+            }, 3000);
+        }
+
+        // 退出黑屏模式
+        function exitBlackScreen() {
+            // 先退出全屏
+            if (document.fullscreenElement) {
+                exitFullscreen();
+            }
+
+            navbar.classList.remove('hidden');
+            mainContent.classList.remove('hidden');
+            blackscreen.classList.add('hidden');
+            body.classList.remove('fullscreen-mode', 'show-cursor');
+            body.style.overflow = '';
+
+            // 重置欢迎文字
+            welcomeText.style.display = '';
+            welcomeText.classList.remove('fade-out');
+            hint.classList.remove('fade-out');
+
+            clearTimeout(hideWelcomeTimer);
+            clearTimeout(hideHintTimer);
+            clearTimeout(hideCursorTimer);
+        }
 
         // 双击进入/退出全屏
         blackscreen.addEventListener('dblclick', toggleFullscreen);
 
         // 鼠标移动时显示光标和提示
         document.addEventListener('mousemove', () => {
-            body.classList.add('show-cursor');
-            hint.classList.remove('hidden');
+            if (!blackscreen.classList.contains('hidden')) {
+                body.classList.add('show-cursor');
+                hint.classList.remove('fade-out');
 
-            // 清除之前的定时器
-            clearTimeout(hideCursorTimer);
-            clearTimeout(hideHintTimer);
+                clearTimeout(hideCursorTimer);
+                clearTimeout(hideHintTimer);
 
-            // 2秒后隐藏光标和提示
-            hideCursorTimer = setTimeout(() => {
-                body.classList.remove('show-cursor');
-            }, 2000);
+                // 2秒后隐藏光标
+                hideCursorTimer = setTimeout(() => {
+                    body.classList.remove('show-cursor');
+                }, 2000);
 
-            hideHintTimer = setTimeout(() => {
-                hint.classList.add('hidden');
-            }, 3000);
+                // 3秒后隐藏提示
+                hideHintTimer = setTimeout(() => {
+                    hint.classList.add('fade-out');
+                }, 3000);
+            }
         });
 
         // 全屏切换函数
@@ -150,10 +241,8 @@
                 !document.webkitFullscreenElement &&
                 !document.mozFullScreenElement &&
                 !document.msFullscreenElement) {
-                // 进入全屏
                 enterFullscreen();
             } else {
-                // 退出全屏
                 exitFullscreen();
             }
         }
@@ -161,14 +250,13 @@
         // 进入全屏
         function enterFullscreen() {
             const elem = document.documentElement;
-
             if (elem.requestFullscreen) {
                 elem.requestFullscreen();
-            } else if (elem.webkitRequestFullscreen) { // Safari
+            } else if (elem.webkitRequestFullscreen) {
                 elem.webkitRequestFullscreen();
-            } else if (elem.mozRequestFullScreen) { // Firefox
+            } else if (elem.mozRequestFullScreen) {
                 elem.mozRequestFullScreen();
-            } else if (elem.msRequestFullscreen) { // IE/Edge
+            } else if (elem.msRequestFullscreen) {
                 elem.msRequestFullscreen();
             }
         }
@@ -177,11 +265,11 @@
         function exitFullscreen() {
             if (document.exitFullscreen) {
                 document.exitFullscreen();
-            } else if (document.webkitExitFullscreen) { // Safari
+            } else if (document.webkitExitFullscreen) {
                 document.webkitExitFullscreen();
-            } else if (document.mozCancelFullScreen) { // Firefox
+            } else if (document.mozCancelFullScreen) {
                 document.mozCancelFullScreen();
-            } else if (document.msExitFullscreen) { // IE/Edge
+            } else if (document.msExitFullscreen) {
                 document.msExitFullscreen();
             }
         }
@@ -197,32 +285,23 @@
                 document.webkitFullscreenElement ||
                 document.mozFullScreenElement ||
                 document.msFullscreenElement) {
-                hint.textContent = '双击屏幕退出全屏模式';
+                hint.textContent = '双击屏幕退出全屏 | 按 ESC 退出';
             } else {
-                hint.textContent = '双击屏幕进入全屏模式';
+                hint.textContent = '双击屏幕进入全屏模式 | 按 ESC 退出';
             }
         }
 
-        // 键盘ESC退出全屏
+        // 键盘ESC退出
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                exitFullscreen();
+            if (e.key === 'Escape' && !blackscreen.classList.contains('hidden')) {
+                exitBlackScreen();
             }
         });
 
         // 防止右键菜单
-        document.addEventListener('contextmenu', (e) => {
+        blackscreen.addEventListener('contextmenu', (e) => {
             e.preventDefault();
         });
-
-        // 获取介绍元素
-        const intro = document.querySelector('.intro');
-
-        // 初始化：3秒后隐藏提示和介绍
-        setTimeout(() => {
-            hint.classList.add('hidden');
-            intro.classList.add('hidden');
-        }, 5000);
     </script>
 </body>
 </html>

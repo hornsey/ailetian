@@ -3,320 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>现代待办事项应用</title>
+    <title>待办事项管理 - 乐天 Letian</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .header p {
-            opacity: 0.9;
-            font-size: 1.1rem;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            padding: 20px;
-            background: rgba(102, 126, 234, 0.1);
-            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: #666;
-            margin-top: 5px;
-        }
-
-        .input-section {
-            padding: 30px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .input-container {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .todo-input {
-            flex: 1;
-            padding: 15px 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 25px;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .todo-input:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .add-btn {
-            padding: 15px 25px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .add-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        .add-btn:active {
-            transform: translateY(0);
-        }
-
-        .filter-section {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .filter-btn {
-            padding: 8px 16px;
-            border: 2px solid #667eea;
-            background: transparent;
-            color: #667eea;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .filter-btn.active,
-        .filter-btn:hover {
-            background: #667eea;
-            color: white;
-        }
-
-        .todo-list {
-            padding: 20px;
-            min-height: 300px;
-        }
-
-        .todo-item {
-            display: flex;
-            align-items: center;
-            padding: 20px;
-            margin-bottom: 15px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border-left: 4px solid #667eea;
-        }
-
-        .todo-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .todo-item.completed {
-            opacity: 0.7;
-            border-left-color: #4CAF50;
-        }
-
-        .todo-checkbox {
-            width: 20px;
-            height: 20px;
-            margin-right: 15px;
-            cursor: pointer;
-            accent-color: #4CAF50;
-        }
-
-        .todo-text {
-            flex: 1;
-            font-size: 1rem;
-            line-height: 1.5;
-            transition: all 0.3s ease;
-        }
-
-        .todo-item.completed .todo-text {
-            text-decoration: line-through;
-            color: #999;
-        }
-
-        .todo-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .delete-btn {
-            padding: 8px 12px;
-            background: #ff4757;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .delete-btn:hover {
-            background: #ff3742;
-            transform: scale(1.05);
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #999;
-        }
-
-        .empty-state-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
-
-        .empty-state h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        .clear-completed {
-            padding: 12px 24px;
-            background: #ff4757;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            margin: 20px auto;
-            display: block;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .clear-completed:hover {
-            background: #ff3742;
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                border-radius: 15px;
-            }
-
-            .header {
-                padding: 20px;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .input-section {
-                padding: 20px;
-            }
-
-            .input-container {
-                flex-direction: column;
-            }
-
-            .add-btn {
-                width: 100%;
-            }
-
-            .todo-item {
-                padding: 15px;
-            }
-
-            .stats {
-                padding: 15px;
-            }
-
-            .stat-number {
-                font-size: 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-
-            .filter-section {
-                flex-wrap: wrap;
-            }
-
-            .filter-btn {
-                font-size: 0.8rem;
-                padding: 6px 12px;
-            }
-        }
-
         .fade-in {
-            animation: fadeIn 0.5s ease-in;
+            animation: fadeIn 0.3s ease-in;
         }
-
         .fade-out {
             animation: fadeOut 0.3s ease-out;
         }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(10px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
         @keyframes fadeOut {
             from {
                 opacity: 1;
@@ -324,55 +29,101 @@
             }
             to {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(-10px);
             }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>✓ 待办事项</h1>
-            <p>管理你的日常任务</p>
-        </div>
-
-        <div class="stats">
-            <div class="stat-item">
-                <div class="stat-number" id="totalTasks">0</div>
-                <div class="stat-label">总任务</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" id="completedTasks">0</div>
-                <div class="stat-label">已完成</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" id="pendingTasks">0</div>
-                <div class="stat-label">待完成</div>
+<body class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <!-- 头部导航 -->
+    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-slate-200 z-50">
+        <div class="max-w-4xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="/" class="text-xl font-bold text-slate-800">乐天 Letian</a>
+                <a href="/" class="text-slate-600 hover:text-slate-900 transition-colors">返回首页</a>
             </div>
         </div>
+    </nav>
 
-        <div class="input-section">
-            <div class="input-container">
-                <input type="text" class="todo-input" id="todoInput" placeholder="添加新的待办事项..." maxlength="100">
-                <button class="add-btn" id="addBtn">添加</button>
+    <!-- 主要内容 -->
+    <main class="pt-24 pb-16">
+        <div class="max-w-4xl mx-auto px-6">
+            <!-- 标题和统计 -->
+            <div class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden mb-6">
+                <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8">
+                    <h1 class="text-3xl font-bold mb-2">待办事项管理</h1>
+                    <p class="text-blue-100">高效管理你的日常任务</p>
+                </div>
+
+                <!-- 统计卡片 -->
+                <div class="grid grid-cols-3 divide-x divide-slate-200">
+                    <div class="p-6 text-center">
+                        <div class="text-3xl font-bold text-blue-600" id="totalTasks">0</div>
+                        <div class="text-sm text-slate-600 mt-1">总任务</div>
+                    </div>
+                    <div class="p-6 text-center">
+                        <div class="text-3xl font-bold text-green-600" id="completedTasks">0</div>
+                        <div class="text-sm text-slate-600 mt-1">已完成</div>
+                    </div>
+                    <div class="p-6 text-center">
+                        <div class="text-3xl font-bold text-orange-600" id="pendingTasks">0</div>
+                        <div class="text-sm text-slate-600 mt-1">待完成</div>
+                    </div>
+                </div>
             </div>
-            <div class="filter-section">
-                <button class="filter-btn active" data-filter="all">全部</button>
-                <button class="filter-btn" data-filter="pending">待完成</button>
-                <button class="filter-btn" data-filter="completed">已完成</button>
+
+            <!-- 输入和过滤区 -->
+            <div class="bg-white rounded-2xl p-6 shadow-lg border border-slate-200 mb-6">
+                <div class="flex gap-3 mb-4">
+                    <input
+                        type="text"
+                        id="todoInput"
+                        class="flex-1 px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="添加新的待办事项..."
+                        maxlength="100"
+                    >
+                    <button
+                        id="addBtn"
+                        class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                    >
+                        添加
+                    </button>
+                </div>
+
+                <!-- 过滤按钮 -->
+                <div class="flex gap-2 justify-center">
+                    <button class="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-blue-600 text-white" data-filter="all">
+                        全部
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-colors border border-slate-300 text-slate-600 hover:bg-slate-50" data-filter="pending">
+                        待完成
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-colors border border-slate-300 text-slate-600 hover:bg-slate-50" data-filter="completed">
+                        已完成
+                    </button>
+                </div>
+            </div>
+
+            <!-- 任务列表 -->
+            <div class="bg-white rounded-2xl p-6 shadow-lg border border-slate-200">
+                <div id="todoList">
+                    <div class="text-center py-12 text-slate-400">
+                        <div class="text-6xl mb-4">📝</div>
+                        <h3 class="text-lg font-medium text-slate-600 mb-2">暂无待办事项</h3>
+                        <p class="text-sm">添加你的第一个任务开始吧！</p>
+                    </div>
+                </div>
+
+                <!-- 清除已完成按钮 -->
+                <button
+                    id="clearCompleted"
+                    class="w-full mt-6 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium hidden"
+                >
+                    清除已完成任务
+                </button>
             </div>
         </div>
-
-        <div class="todo-list" id="todoList">
-            <div class="empty-state" id="emptyState">
-                <div class="empty-state-icon">📝</div>
-                <h3>暂无待办事项</h3>
-                <p>添加你的第一个任务开始吧！</p>
-            </div>
-        </div>
-
-        <button class="clear-completed" id="clearCompleted" style="display: none;">清除已完成</button>
-    </div>
+    </main>
 
     <script>
         class TodoApp {
@@ -408,7 +159,10 @@
                 const input = document.getElementById('todoInput');
                 const text = input.value.trim();
 
-                if (!text) return;
+                if (!text) {
+                    alert('请输入任务内容');
+                    return;
+                }
 
                 const todo = {
                     id: Date.now(),
@@ -452,9 +206,12 @@
             setFilter(filter) {
                 this.currentFilter = filter;
                 document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.remove('active');
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('border', 'border-slate-300', 'text-slate-600', 'hover:bg-slate-50');
                 });
-                document.querySelector(`[data-filter="${filter}"]`).classList.add('active');
+                const activeBtn = document.querySelector(`[data-filter="${filter}"]`);
+                activeBtn.classList.remove('border', 'border-slate-300', 'text-slate-600', 'hover:bg-slate-50');
+                activeBtn.classList.add('bg-blue-600', 'text-white');
                 this.render();
             }
 
@@ -470,6 +227,7 @@
             }
 
             clearCompleted() {
+                if (!confirm('确定要清除所有已完成的任务吗？')) return;
                 this.todos = this.todos.filter(t => !t.completed);
                 this.saveTodos();
                 this.render();
@@ -478,34 +236,44 @@
 
             render() {
                 const todoList = document.getElementById('todoList');
-                const emptyState = document.getElementById('emptyState');
                 const clearBtn = document.getElementById('clearCompleted');
                 const filteredTodos = this.getFilteredTodos();
 
                 if (filteredTodos.length === 0) {
+                    const emptyMessage = this.todos.length === 0
+                        ? { icon: '📝', title: '暂无待办事项', desc: '添加你的第一个任务开始吧！' }
+                        : { icon: '🔍', title: '没有符合条件的任务', desc: '尝试切换到其他过滤器' };
+
                     todoList.innerHTML = `
-                        <div class="empty-state">
-                            <div class="empty-state-icon">📝</div>
-                            <h3>${this.todos.length === 0 ? '暂无待办事项' : '没有符合条件的任务'}</h3>
-                            <p>${this.todos.length === 0 ? '添加你的第一个任务开始吧！' : '尝试切换到其他过滤器'}</p>
+                        <div class="text-center py-12 text-slate-400">
+                            <div class="text-6xl mb-4">${emptyMessage.icon}</div>
+                            <h3 class="text-lg font-medium text-slate-600 mb-2">${emptyMessage.title}</h3>
+                            <p class="text-sm">${emptyMessage.desc}</p>
                         </div>
                     `;
                 } else {
                     todoList.innerHTML = filteredTodos.map(todo => `
-                        <div class="todo-item ${todo.completed ? 'completed' : ''} fade-in" data-id="${todo.id}">
-                            <input type="checkbox" class="todo-checkbox" ${todo.completed ? 'checked' : ''}
-                                   onchange="todoApp.toggleTodo(${todo.id})">
-                            <span class="todo-text">${this.escapeHtml(todo.text)}</span>
-                            <div class="todo-actions">
-                                <button class="delete-btn" onclick="todoApp.deleteTodo(${todo.id})">删除</button>
-                            </div>
+                        <div class="flex items-center gap-4 p-4 mb-3 bg-slate-50 rounded-lg border border-slate-200 hover:shadow-md transition-shadow fade-in ${todo.completed ? 'opacity-60' : ''}" data-id="${todo.id}">
+                            <input
+                                type="checkbox"
+                                class="w-5 h-5 rounded border-slate-300 text-blue-600 focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                                ${todo.completed ? 'checked' : ''}
+                                onchange="todoApp.toggleTodo(${todo.id})"
+                            >
+                            <span class="flex-1 text-slate-700 ${todo.completed ? 'line-through text-slate-400' : ''}">${this.escapeHtml(todo.text)}</span>
+                            <button
+                                onclick="todoApp.deleteTodo(${todo.id})"
+                                class="px-3 py-1 text-sm bg-red-100 text-red-600 rounded hover:bg-red-200 transition-colors"
+                            >
+                                删除
+                            </button>
                         </div>
                     `).join('');
                 }
 
                 // 显示/隐藏清除按钮
                 const hasCompleted = this.todos.some(t => t.completed);
-                clearBtn.style.display = hasCompleted ? 'block' : 'none';
+                clearBtn.classList.toggle('hidden', !hasCompleted);
             }
 
             updateStats() {
