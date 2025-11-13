@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>精简商业模式画布（可填写）</title>
+  <style>
+    :root{--gap:12px;--pad:12px;--bg:#f7f8fb;--card:#ffffff;--accent:#0f4c81}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'PingFang SC','Hiragino Sans GB',"Microsoft YaHei",Arial; background:var(--bg); margin:0; color:#111}
+    .wrap{max-width:1200px;margin:20px auto;padding:18px}
+    h1{margin:0 0 12px;font-size:20px;color:var(--accent)}
+    .grid{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(80px,auto);gap:var(--gap)}
+    .box{background:var(--card);border-radius:8px;padding:var(--pad);box-shadow:0 1px 0 rgba(0,0,0,0.04);display:flex;flex-direction:column}
+    .box h3{margin:0 0 8px;font-size:13px;color:#222}
+    .hint{font-size:12px;color:#666;margin-bottom:6px}
+    textarea,input[type=text]{width:100%;box-sizing:border-box;border:1px solid #e6e9ef;border-radius:6px;padding:8px;font-size:13px;background:transparent}
+    textarea{min-height:90px;resize:vertical}
+    .wide{grid-column:1 / -1}
+    /* layout similar to canvas image */
+    .seg1{grid-column:1 / 2;grid-row:1 / 3}
+    .seg2{grid-column:2 / 4;grid-row:1 / 2}
+    .seg3{grid-column:4 / 5;grid-row:1 / 2}
+    .seg4{grid-column:5 / 7;grid-row:1 / 2}
+    .seg5{grid-column:1 / 3;grid-row:3 / 4}
+    .seg6{grid-column:3 / 4;grid-row:2 / 4}
+    .seg7{grid-column:4 / 5;grid-row:2 / 3}
+    .seg8{grid-column:5 / 6;grid-row:2 / 4}
+    .seg9{grid-column:6 / 7;grid-row:2 / 3}
+    .bottom-left{grid-column:1 / 4;grid-row:4 / 5}
+    .bottom-right{grid-column:4 / 7;grid-row:4 / 5}
+    .controls{display:flex;gap:10px;align-items:center;margin-top:14px}
+    button{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:8px;cursor:pointer}
+    button.secondary{background:#4b5563}
+    .small{font-size:12px;padding:6px 8px}
+    label.small{font-size:12px;color:#444}
+    .note{font-size:12px;color:#666;margin-top:6px}
+    @media (max-width:900px){
+      .grid{grid-template-columns:1fr;}
+      .seg1,.seg2,.seg3,.seg4,.seg5,.seg6,.seg7,.seg8,.seg9,.bottom-left,.bottom-right{grid-column:auto}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>精简商业模式画布 — 可填写表单</h1>
+    <div class="grid" id="canvas">
+      <div class="box seg1">
+        <h3>客户群体（Customer Segments）</h3>
+        <div class="hint">列出目标客户与用户（谁付费、谁使用）</div>
+        <textarea id="customers" placeholder="例如：独立内容创作者；MCN；内容策略经理，说明他们的关键特征..."></textarea>
+      </div>
+
+      <div class="box seg2">
+        <h3>早期采用者（Early Adopters）</h3>
+        <div class="hint">理想的第一批用户特征（谁最有可能试用）</div>
+        <textarea id="early" placeholder="例如：每月上传≥8条、愿意尝试新工具的独立UP主..."></textarea>
+      </div>
+
+      <div class="box seg3">
+        <h3>问题（Problems） — 列出 3 个</h3>
+        <div class="hint">用客户语言写出他们的核心痛点（可标注严重度）</div>
+        <label class="small">问题 1</label>
+        <input type="text" id="prob1" placeholder="例如：找不到次日爆款关键词" />
+        <label class="small">问题 2</label>
+        <input type="text" id="prob2" placeholder="..." />
+        <label class="small">问题 3</label>
+        <input type="text" id="prob3" placeholder="..." />
+      </div>
+
+      <div class="box seg4">
+        <h3>现有解决方案（Existing Alternatives）</h3>
+        <div class="hint">用户当前如何“凑合”或竞争对手有哪些</div>
+        <textarea id="alternatives" placeholder="例如：手动查看 YouTube、Google Trends、付费工具或外包研究..."></textarea>
+      </div>
+
+      <div class="box seg5">
+        <h3>独特价值主张（UVP）</h3>
+        <div class="hint">用一句话说明你为谁解决什么独特问题（用户收益）</div>
+        <input type="text" id="uvp" placeholder="例如：7 分钟找出你下条视频的 3 个高概率爆款点" />
+      </div>
+
+      <div class="box seg6">
+        <h3>解决方案（Solutions）</h3>
+        <div class="hint">针对每个问题写最小可验证的功能（MVP）</div>
+        <textarea id="solutions" placeholder="例如：自动关键词爬取 + 热度评分 + 周报邮件...（对照问题编号）"></textarea>
+      </div>
+
+      <div class="box seg7">
+        <h3>不公平优势（Unfair Advantage）</h3>
+        <div class="hint">难以被复制的壁垒（数据、关系、专利、品牌等）</div>
+        <textarea id="moat" placeholder="例如：3 个月历史赛道数据仓库；独家合作渠道..."></textarea>
+      </div>
+
+      <div class="box seg8">
+        <h3>渠道（Channels）</h3>
+        <div class="hint">如何获取客户（列出具体渠道和测试方式）</div>
+        <textarea id="channels" placeholder="例如：创作者社群、MCN 合作、YouTube 案例演示、付费广告..."></textarea>
+      </div>
+
+      <div class="box seg9">
+        <h3>关键指标（Key Metrics）</h3>
+        <div class="hint">选 3–5 个衡量产品健康的数字（写基线和目标）</div>
+        <textarea id="metrics" placeholder="例如：周活跃用户、报告下载率、试用转付费率（目标 5%）..."></textarea>
+      </div>
+
+      <div class="box bottom-left">
+        <h3>类比概念（High-level Concept）</h3>
+        <div class="hint">一句话类比，便于理解定位（例如：YouTube 的 Google Trends）</div>
+        <input type="text" id="analogy" placeholder="例如：YouTube 的 Google Trends" />
+      </div>
+
+      <div class="box bottom-right">
+        <h3>成本结构 & 收入来源</h3>
+        <div class="hint">左写成本（固定/可变），右写收入（定价/模式）</div>
+        <label class="small">成本结构（Cost Structure）</label>
+        <textarea id="costs" placeholder="例如：服务器、数据工程师、带宽、营销预算..."></textarea>
+        <label class="small">收入来源（Revenue Streams）</label>
+        <textarea id="revenue" placeholder="例如：月订阅制（基础/专业）、报告付费定制..."></textarea>
+      </div>
+
+    </div>
+
+    <div class="controls">
+      <button id="exportBtn">导出为 Markdown 并 下载</button>
+      <button class="secondary small" id="copyBtn">复制到剪贴板（Markdown）</button>
+      <button class="secondary small" id="clearBtn">清空表单</button>
+      <div class="note">提示：导出将把你填写的内容按画布结构组织为 Markdown 文档。</div>
+    </div>
+  </div>
+
+  <script>
+    function collect() {
+      return {
+        customers: document.getElementById('customers').value.trim(),
+        early: document.getElementById('early').value.trim(),
+        prob1: document.getElementById('prob1').value.trim(),
+        prob2: document.getElementById('prob2').value.trim(),
+        prob3: document.getElementById('prob3').value.trim(),
+        alternatives: document.getElementById('alternatives').value.trim(),
+        uvp: document.getElementById('uvp').value.trim(),
+        solutions: document.getElementById('solutions').value.trim(),
+        moat: document.getElementById('moat').value.trim(),
+        channels: document.getElementById('channels').value.trim(),
+        metrics: document.getElementById('metrics').value.trim(),
+        analogy: document.getElementById('analogy').value.trim(),
+        costs: document.getElementById('costs').value.trim(),
+        revenue: document.getElementById('revenue').value.trim()
+      };
+    }
+
+    function toMarkdown(data){
+      const nl = '\n';
+      let md = '# 精简商业模式画布（Lean Canvas）' + nl + nl;
+      md += '## 客户群体（Customer Segments）' + nl + (data.customers || '*未填写*') + nl + nl;
+      md += '## 早期采用者（Early Adopters）' + nl + (data.early || '*未填写*') + nl + nl;
+      md += '## 问题（Problems）' + nl;
+      const probs = [data.prob1,data.prob2,data.prob3].filter(Boolean);
+      if(probs.length>0){
+        probs.forEach((p,i)=>{ md += (i+1) + '. ' + p + nl; });
+      } else md += '*未填写*' + nl;
+      md += nl;
+      md += '## 现有解决方案（Existing Alternatives）' + nl + (data.alternatives || '*未填写*') + nl + nl;
+      md += '## 独特价值主张（UVP）' + nl + (data.uvp || '*未填写*') + nl + nl;
+      md += '## 解决方案（Solutions）' + nl + (data.solutions || '*未填写*') + nl + nl;
+      md += '## 不公平优势（Unfair Advantage）' + nl + (data.moat || '*未填写*') + nl + nl;
+      md += '## 渠道（Channels）' + nl + (data.channels || '*未填写*') + nl + nl;
+      md += '## 关键指标（Key Metrics）' + nl + (data.metrics || '*未填写*') + nl + nl;
+      md += '## 类比概念（High-level Concept）' + nl + (data.analogy || '*未填写*') + nl + nl;
+      md += '## 成本结构（Cost Structure）' + nl + (data.costs || '*未填写*') + nl + nl;
+      md += '## 收入来源（Revenue Streams）' + nl + (data.revenue || '*未填写*') + nl + nl;
+      md += '---' + nl + '> 由精简商业模式画布生成，导出时间：' + new Date().toLocaleString();
+      return md;
+    }
+
+    function downloadMarkdown(filename, content){
+      const blob = new Blob([content], {type: 'text/markdown;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 3000);
+    }
+
+    document.getElementById('exportBtn').addEventListener('click', ()=>{
+      const data = collect();
+      const md = toMarkdown(data);
+      const filename = 'lean-canvas-' + (new Date()).toISOString().slice(0,10) + '.md';
+      downloadMarkdown(filename, md);
+    });
+
+    document.getElementById('copyBtn').addEventListener('click', async ()=>{
+      const md = toMarkdown(collect());
+      try{
+        await navigator.clipboard.writeText(md);
+        alert('已复制 Markdown 到剪贴板');
+      }catch(e){
+        const ta = document.createElement('textarea'); ta.value = md; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); alert('已复制（回退方式）');
+      }
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', ()=>{
+      if(!confirm('确定要清空表单吗？此操作不可撤销。')) return;
+      document.querySelectorAll('textarea,input[type=text]').forEach(el=>el.value='');
+    });
+  </script>
+</body>
+</html>
